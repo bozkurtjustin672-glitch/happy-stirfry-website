@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>快乐小炒 — 称重快餐连锁（省妇幼总店）</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script>tailwind.config={theme:{extend:{colors:{brand:{50:"#f0fdf4",100:"#dcfce7",200:"#bbf7d0",300:"#86efac",400:"#4ade80",500:"#22c55e",600:"#16a34a",700:"#15803d",800:"#166534",900:"#14532d"},warm:{50:"#fffdf5",100:"#fffae3",200:"#fff3b0",300:"#ffe680"}},fontFamily:{sans:['PingFang SC','Microsoft YaHei','Helvetica Neue','Arial','sans-serif']},borderRadius:{"2xl":"1rem","3xl":"1.5rem"},boxShadow:{soft:"0 4px 20px rgba(0,0,0,0.06)",hover:"0 12px 32px rgba(22,163,74,0.15)"}}}}};</script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#f0fdf4}
+    ::-webkit-scrollbar-thumb{background:#4ade80;border-radius:3px}
+    .scroll-reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+    .scroll-reveal.revealed{opacity:1;transform:translateY(0)}
+    .carousel-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+    .nav-scrolled{background:rgba(255,255,255,.95)!important;backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(0,0,0,.08)}
+    .dish-card{transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s cubic-bezier(.4,0,.2,1)}
+    .dish-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 12px 32px rgba(22,163,74,.18)}
+    .lazy-img{opacity:1;transition:opacity .4s ease}
+    .lazy-img.loaded{opacity:1}
+    .back-top-btn{transition:all .3s ease}
+    .back-top-btn.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  </style>
+</head>
+<body class="bg-brand-50 font-sans text-gray-800 antialiased">
+<!-- 顶部公告栏 -->
+<div class="bg-brand-600 text-white text-center text-sm py-1.5 px-4">
+  <span class="inline-block animate__animated animate__flash animate__infinite animate__slow"><i class="fas fa-fire mr-1"></i></span>
+  总店（省妇幼店）开业酬宾 · 全场统一价 <strong>2.98元/两</strong> · 米饭无限续！
+</div>
+
+<!-- 导航栏 · 滚动吸附 + 渐变 -->
+<header id="navbar" class="sticky top-0 z-50 bg-white/80 transition-all duration-300">
+  <nav class="max-w-7xl mx-auto px-4 lg:px-6 h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2 group">
+      <div class="w-9 h-9 bg-brand-500 rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-sm group-hover:shadow-md transition-shadow">
+        <i class="fas fa-utensils"></i>
+      </div>
+      <span class="text-xl font-bold text-brand-700 tracking-tight">快乐小炒<span class="text-xs text-gray-400 font-normal ml-1 hidden sm:inline">称重快餐</span></span>
+    </a>
+    <ul class="hidden md:flex items-center gap-1">
+      <li><a href="#hero" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50 transition-all">首页</a></li>
+      <li><a href="#about" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50 transition-all">品牌故事</a></li>
+      <li><a href="#menu" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50 transition-all">菜品展示</a></li>
+      <li><a href="#features" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50 transition-all">我们的优势</a></li>
+      <li><a href="#contact" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50 transition-all">联系我们</a></li>
+    </ul>
+    <button id="menuBtn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center text-gray-600 hover:bg-brand-50 transition-colors" aria-label="打开菜单">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="md:hidden hidden bg-white/95 backdrop-blur-lg border-t border-gray-100 shadow-lg">
+    <ul class="py-2 px-4 space-y-1">
+      <li><a href="#hero" class="mobile-link block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50">首页</a></li>
+      <li><a href="#about" class="mobile-link block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50">品牌故事</a></li>
+      <li><a href="#menu" class="mobile-link block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50">菜品展示</a></li>
+      <li><a href="#features" class="mobile-link block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50">我们的优势</a></li>
+      <li><a href="#contact" class="mobile-link block px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:text-brand-600 hover:bg-brand-50">联系我们</a></li>
+    </ul>
+  </div>
+</header>
+<!-- Hero · 动态轮播 -->
+<section id="hero" class="relative overflow-hidden bg-gradient-to-br from-brand-800 via-brand-700 to-green-900">
+  <div class="relative max-w-7xl mx-auto">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- 轮播项 1：门店照片 -->
+      <div class="carousel-slide min-w-full flex flex-col lg:flex-row items-center px-6 lg:px-16 py-12 lg:py-20 gap-8 lg:gap-12">
+        <div class="flex-1 text-center lg:text-left">
+          <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white/80 text-xs font-medium mb-4 backdrop-blur-sm"><i class="fas fa-store text-yellow-300 mr-1"></i> 门店实拍</span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">快乐小炒<br/><span class="text-brand-200">称重快餐连锁</span></h1>
+          <p class="text-white/80 text-base sm:text-lg max-w-xl mb-6 leading-relaxed">新鲜食材 · 现炒现卖 · 按两称重 · 丰俭由君</p>
+          <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+            <a href="#menu" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-brand-700 font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all"><i class="fas fa-utensils"></i> 看看菜品</a>
+            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600/30 text-white border border-white/30 font-medium rounded-2xl hover:bg-brand-600/50 transition-all"><i class="fas fa-map-marker-alt"></i> 到店品尝</a>
+          </div>
+        </div>
+        <div class="flex-1 flex justify-center lg:justify-end">
+          <img src="images/banner1.jpg" alt="快乐小炒门店实拍" class="w-full max-w-xs aspect-square object-cover rounded-3xl shadow-2xl" loading="lazy" />
+        </div>
+      </div>
+      <!-- 轮播项 2：菜品展示 -->
+      <div class="carousel-slide min-w-full flex flex-col lg:flex-row items-center px-6 lg:px-16 py-12 lg:py-20 gap-8 lg:gap-12">
+        <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
+          <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white/80 text-xs font-medium mb-4 backdrop-blur-sm"><i class="fas fa-utensils text-orange-300 mr-1"></i> 菜品展示</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">20+ 种现炒菜品<br/><span class="text-brand-200">天天不重样</span></h2>
+          <p class="text-white/80 text-base sm:text-lg max-w-xl mb-6 leading-relaxed">辣椒炒肉、红烧排骨、麻婆豆腐……总有一款适合你的胃</p>
+          <a href="#menu" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 text-white border border-white/30 font-medium rounded-2xl hover:bg-white/30 transition-all"><i class="fas fa-arrow-right"></i> 浏览完整菜单</a>
+        </div>
+        <div class="flex-1 flex justify-center lg:justify-start order-1 lg:order-2">
+          <img src="images/23.jpg" onerror="this.style.display='none'" alt="快乐小炒菜品实拍" class="w-full max-w-xs aspect-square object-cover rounded-3xl shadow-2xl" loading="lazy" />
+        </div>
+      </div>
+      <!-- 轮播项 3：用餐环境 -->
+      <div class="carousel-slide min-w-full flex flex-col lg:flex-row items-center px-6 lg:px-16 py-12 lg:py-20 gap-8 lg:gap-12">
+        <div class="flex-1 text-center lg:text-left">
+          <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white/80 text-xs font-medium mb-4 backdrop-blur-sm"><i class="fas fa-store-alt text-green-300 mr-1"></i> 用餐环境</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">舒适就餐环境<br/><span class="text-brand-200">干净卫生</span></h2>
+          <p class="text-white/80 text-base sm:text-lg max-w-xl mb-6 leading-relaxed">明厨亮灶，每日消杀，让您吃得安心放心</p>
+          <a href="#contact" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 text-white border border-white/30 font-medium rounded-2xl hover:bg-white/30 transition-all"><i class="fas fa-map-marker-alt"></i> 到店体验</a>
+        </div>
+        <div class="flex-1 flex justify-center lg:justify-end">
+          <img src="images/banner3.jpg" onerror="this.style.display='none'" alt="快乐小炒用餐环境" class="w-full max-w-xs aspect-square object-cover rounded-3xl shadow-2xl" loading="lazy" />
+        </div>
+      </div>
+      <!-- 轮播项 4：品牌 LOGO / 价格 -->
+      <div class="carousel-slide min-w-full flex flex-col lg:flex-row items-center px-6 lg:px-16 py-12 lg:py-20 gap-8 lg:gap-12">
+        <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
+          <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white/80 text-xs font-medium mb-4 backdrop-blur-sm"><i class="fas fa-tag text-yellow-300 mr-1"></i> 统一价格</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">全场统一价<br/><span class="text-brand-200 text-5xl sm:text-6xl">2.98元/两</span></h2>
+          <p class="text-white/80 text-base sm:text-lg max-w-xl mb-6 leading-relaxed">按两称重，想吃多少称多少，米饭无限续！</p>
+          <a href="#features" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 text-white border border-white/30 font-medium rounded-2xl hover:bg-white/30 transition-all"><i class="fas fa-check-circle"></i> 了解我们的优势</a>
+        </div>
+        <div class="flex-1 flex justify-center lg:justify-start order-1 lg:order-2">
+          <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+            <div class="absolute inset-0 rounded-full bg-brand-400/20 animate-pulse"></div>
+            <div class="absolute inset-4 rounded-full bg-brand-300/20 animate-pulse" style="animation-delay:0.5s"></div>
+            <div class="absolute inset-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center shadow-2xl">
+              <div class="text-center">
+                <div class="text-5xl mb-2 text-white">🥬</div>
+                <div class="text-white font-bold text-2xl tracking-wider">快乐小炒</div>
+                <div class="text-brand-200 text-sm mt-1">称重快餐 · 新鲜现炒</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="carouselPrev" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/40 transition-all flex items-center justify-center shadow-lg z-10" aria-label="上一张"><i class="fas fa-chevron-left"></i></button>
+    <button id="carouselNext" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/40 transition-all flex items-center justify-center shadow-lg z-10" aria-label="下一张"><i class="fas fa-chevron-right"></i></button>
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10" id="carouselDots"></div>
+  </div>
+</section>
+<!-- 品牌故事 -->
+<section id="about" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6">
+    <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div class="scroll-reveal relative">
+        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
+          <img src="images/banner3.jpg" onerror="this.style.display='none'" alt="快乐小炒门店环境" class="w-full h-72 sm:h-96 object-cover" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" />
+        </div>
+        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-brand-100 rounded-3xl -z-10"></div>
+        <div class="absolute -top-4 -left-4 w-24 h-24 bg-warm-100 rounded-3xl -z-10"></div>
+      </div>
+      <div class="scroll-reveal">
+        <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">About Us</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-6">关于 <span class="text-brand-600">快乐小炒</span></h2>
+        <div class="space-y-4 text-gray-600 leading-relaxed">
+          <p><strong class="text-gray-800">快乐小炒</strong> 是长沙本土成长的称重快餐连锁品牌，以"新鲜现炒、称重计费、好吃不贵"为核心理念，致力于为都市白领、社区居民提供健康便捷的日常用餐选择。</p>
+          <p>所有菜品统一价格 <strong class="text-brand-600 text-lg">2.98元/两</strong>，自助选取、按需称重，想吃多少吃多少，既避免了浪费，又让每顿饭都物超所值。</p>
+          <p>总店位于长沙市开福区东兴园巷2号（省妇幼旁），交通便利，环境舒适，欢迎前来品尝！</p>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mt-8">
+          <div class="text-center p-4 bg-brand-50 rounded-2xl"><div class="text-2xl font-bold text-brand-600">20+</div><div class="text-xs text-gray-500 mt-1">现炒菜品</div></div>
+          <div class="text-center p-4 bg-brand-50 rounded-2xl"><div class="text-2xl font-bold text-brand-600">2.98</div><div class="text-xs text-gray-500 mt-1">元/两</div></div>
+          <div class="text-center p-4 bg-brand-50 rounded-2xl"><div class="text-2xl font-bold text-brand-600">0</div><div class="text-xs text-gray-500 mt-1">预制菜</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 菜品展示 -->
+<section id="menu" class="py-16 lg:py-24 bg-gradient-to-b from-brand-50 to-white">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6">
+    <div class="text-center mb-12 scroll-reveal">
+      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Our Menu</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">菜品展示</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">所有菜品统一价格 <strong class="text-brand-600">2.98元/两</strong>，自选称重，丰俭由君</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-2 mb-10 scroll-reveal" id="categoryTabs">
+      <button class="cat-tab active px-5 py-2.5 rounded-xl text-sm font-medium bg-brand-600 text-white shadow-md" data-cat="all">全部菜品</button>
+      <button class="cat-tab px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-gray-600 shadow-sm hover:shadow-md hover:bg-brand-50" data-cat="hot"><i class="fas fa-fire text-orange-400 mr-1"></i> 热菜</button>
+      <button class="cat-tab px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-gray-600 shadow-sm hover:shadow-md hover:bg-brand-50" data-cat="cold"><i class="fas fa-snowflake text-blue-400 mr-1"></i> 凉菜</button>
+      <button class="cat-tab px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-gray-600 shadow-sm hover:shadow-md hover:bg-brand-50" data-cat="staple"><i class="fas fa-bread-slice text-yellow-600 mr-1"></i> 主食</button>
+      <button class="cat-tab px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-gray-600 shadow-sm hover:shadow-md hover:bg-brand-50" data-cat="soup"><i class="fas fa-mug-hot text-amber-500 mr-1"></i> 汤品</button>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-5" id="dishGrid"></div>
+  </div>
+</section>
+<!-- 我们的优势 -->
+<section id="features" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6">
+    <div class="text-center mb-12 scroll-reveal">
+      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Why Choose Us</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">选择我们的理由</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">用心做好每一餐，让快乐小炒成为您日常用餐的首选</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div class="scroll-reveal p-6 lg:p-8 rounded-3xl bg-brand-50 border border-brand-100 text-center group hover:bg-brand-100 transition-colors">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><span class="text-2xl leading-none">🥬</span></div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">新鲜食材</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">每日清晨采购当季时蔬鲜肉，拒绝冷冻库存，从源头保证品质</p>
+      </div>
+      <div class="scroll-reveal p-6 lg:p-8 rounded-3xl bg-warm-50 border border-warm-200 text-center group hover:bg-warm-100 transition-colors">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-orange-400 text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-fire"></i></div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">现炒锅气</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">坚持明档现炒，每道菜都带着热腾腾的锅气，吃得就是这份新鲜</p>
+      </div>
+      <div class="scroll-reveal p-6 lg:p-8 rounded-3xl bg-blue-50 border border-blue-100 text-center group hover:bg-blue-100 transition-colors">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-blue-500 text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-weight"></i></div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">称重计费</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">按两称重，想吃多少夹多少，统一价2.98元/两，透明消费不浪费</p>
+      </div>
+      <div class="scroll-reveal p-6 lg:p-8 rounded-3xl bg-purple-50 border border-purple-100 text-center group hover:bg-purple-100 transition-colors">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-purple-500 text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-hand-holding-heart"></i></div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">健康卫生</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">明厨亮灶，每日消杀，餐具高温消毒，让您吃得安心放心</p>
+      </div>
+      <div class="scroll-reveal p-6 lg:p-8 rounded-3xl bg-pink-50 border border-pink-100 text-center group hover:bg-pink-100 transition-colors">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-pink-500 text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-smile"></i></div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">贴心服务</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">米饭无限续加，免费例汤，让每位顾客都能吃饱吃好</p>
+      </div>
+      <div class="scroll-reveal p-6 lg:p-8 rounded-3xl bg-amber-50 border border-amber-100 text-center group hover:bg-amber-100 transition-colors">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-tag"></i></div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">超高性价比</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">统一价2.98元/两，花更少的钱吃更多的花样，打工人的食堂首选</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 员工展示 · 期待更新 -->
+<section id="team" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6">
+    <div class="text-center mb-12 scroll-reveal">
+      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Our Team</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">员工风采</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">快乐小炒团队，用心服务每一位顾客</p>
+    </div>
+    <div class="flex justify-center scroll-reveal">
+      <div class="max-w-md w-full p-10 lg:p-14 rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100 border border-brand-200 text-center shadow-soft">
+        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-4xl animate-pulse">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-3">员工风采展示</h3>
+        <p class="text-gray-500 mb-6 leading-relaxed">我们正在收集整理团队成员的精彩瞬间，<br/>敬请期待后续更新。</p>
+        <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-500 text-white rounded-2xl text-sm font-medium shadow-md">
+          <i class="fas fa-spinner fa-spin"></i>
+          <span>期待更新</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-10">
+      <div class="scroll-reveal p-6 rounded-2xl bg-gray-50 border border-dashed border-gray-200 text-center opacity-60">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl"><i class="fas fa-user-plus"></i></div>
+        <p class="text-sm text-gray-400">期待加入</p>
+      </div>
+      <div class="scroll-reveal p-6 rounded-2xl bg-gray-50 border border-dashed border-gray-200 text-center opacity-60">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl"><i class="fas fa-user-plus"></i></div>
+        <p class="text-sm text-gray-400">期待加入</p>
+      </div>
+      <div class="scroll-reveal p-6 rounded-2xl bg-gray-50 border border-dashed border-gray-200 text-center opacity-60">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl"><i class="fas fa-user-plus"></i></div>
+        <p class="text-sm text-gray-400">期待加入</p>
+      </div>
+      <div class="scroll-reveal p-6 rounded-2xl bg-gray-50 border border-dashed border-gray-200 text-center opacity-60">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl"><i class="fas fa-user-plus"></i></div>
+        <p class="text-sm text-gray-400">期待加入</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 门店环境 -->
+<section class="py-16 lg:py-24 bg-brand-50">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6">
+    <div class="text-center mb-12 scroll-reveal">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">门店环境</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">温馨舒适的就餐环境，让每一餐都充满快乐</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 scroll-reveal">
+      <div class="rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all"><img src="images/banner4.jpg" onerror="this.style.display='none'" alt="门店环境" class="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" /></div>
+      <div class="rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all"><img src="images/banner5.jpg" onerror="this.style.display='none'" alt="门店环境" class="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" /></div>
+      <div class="rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all col-span-2 md:col-span-1"><img src="images/banner6.jpg" onerror="this.style.display='none'" alt="门店环境" class="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" /></div>
+      <div class="rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all"><img src="images/22.jpg" onerror="this.style.display='none'" alt="菜品制作" class="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" /></div>
+      <div class="rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all"><img src="images/23.jpg" onerror="this.style.display='none'" alt="菜品展示" class="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" /></div>
+      <div class="rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all"><img src="images/21.jpg" onerror="this.style.display='none'" alt="快乐用餐" class="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" /></div>
+    </div>
+  </div>
+</section>
+<!-- 联系我们 -->
+<section id="contact" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6">
+    <div class="text-center mb-12 scroll-reveal">
+      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Contact</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">联系我们</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">欢迎到店品尝，或通过以下方式联系我们</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+      <div class="scroll-reveal space-y-6">
+        <div class="p-6 bg-brand-50 rounded-3xl border border-brand-100">
+          <h3 class="text-xl font-bold text-brand-700 mb-4"><i class="fas fa-store mr-2"></i>总店（省妇幼店）</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="w-9 h-9 bg-brand-500 text-white rounded-xl flex items-center justify-center shrink-0 mt-0.5"><i class="fas fa-map-marker-alt"></i></span>
+              <div><div class="font-medium text-gray-800">店铺地址</div><div class="text-gray-500">长沙市开福区东兴园巷2号</div></div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-9 h-9 bg-brand-500 text-white rounded-xl flex items-center justify-center shrink-0 mt-0.5"><i class="fas fa-phone-alt"></i></span>
+              <div><div class="font-medium text-gray-800">联系电话</div><a href="tel:15273136841" class="text-brand-600 hover:text-brand-700 font-medium">152-7313-6841</a></div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-9 h-9 bg-brand-500 text-white rounded-xl flex items-center justify-center shrink-0 mt-0.5"><i class="fas fa-clock"></i></span>
+              <div><div class="font-medium text-gray-800">营业时间</div><div class="text-gray-500">每天 10:00 - 21:00</div></div>
+            </li>
+          </ul>
+        </div>
+        <div class="p-6 bg-warm-50 rounded-3xl border border-warm-200">
+          <h4 class="font-bold text-gray-800 mb-3"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i>温馨提示</h4>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li><i class="fas fa-check-circle text-brand-500 mr-2"></i>米饭无限续加，吃多少盛多少</li>
+            <li><i class="fas fa-check-circle text-brand-500 mr-2"></i>统一价格 2.98元/两，称重计费透明</li>
+            <li><i class="fas fa-check-circle text-brand-500 mr-2"></i>每日新鲜现炒，售完即止</li>
+            <li><i class="fas fa-check-circle text-brand-500 mr-2"></i>支持打包外带，方便快捷</li>
+          </ul>
+        </div>
+      </div>
+      <div class="scroll-reveal">
+        <div class="rounded-3xl overflow-hidden shadow-soft h-80 sm:h-full min-h-[300px] bg-gray-100 flex items-center justify-center">
+          <div class="text-center p-8">
+            <i class="fas fa-map-marked-alt text-5xl text-brand-400 mb-4"></i>
+            <p class="text-gray-700 font-medium text-lg">长沙市开福区东兴园巷2号</p>
+            <p class="text-gray-400 text-sm mt-2">省妇幼旁 · 快乐小炒总店</p>
+            <a href="https://uri.amap.com/marker?position=112.9836,28.2055&name=快乐小炒（省妇幼总店）" target="_blank" class="inline-block mt-4 px-5 py-2 bg-brand-500 text-white rounded-xl text-sm hover:bg-brand-600 transition-colors">查看地图 <i class="fas fa-external-link-alt ml-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-400 py-8">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6 text-center">
+    <div class="flex items-center justify-center gap-2 mb-3">
+      <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center text-white text-sm"><i class="fas fa-utensils"></i></div>
+      <span class="text-white font-bold">快乐小炒</span>
+    </div>
+    <p class="text-sm">称重快餐连锁 · 总店（省妇幼店）</p>
+    <p class="text-xs mt-2 opacity-60">&copy; 2026 快乐小炒 版权所有 | 长沙市开福区东兴园巷2号 | 电话：152-7313-6841</p>
+  </div>
+</footer>
+
+<!-- 返回顶部按钮 -->
+<button id="backToTop" class="back-top-btn fixed bottom-6 right-6 w-12 h-12 bg-brand-500 text-white rounded-2xl shadow-lg flex items-center justify-center text-lg opacity-0 translate-y-4 pointer-events-none hover:bg-brand-600 hover:shadow-xl hover:scale-110 transition-all z-50" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function() {
+  'use strict';
+
+  /* ========== 1. 菜品数据 ========== */
+  var DISHES = [
+    { id:1,  name:'辣椒炒肉',   cat:'hot',  desc:'经典湘菜，五花肉煸香配螺丝椒',            img:'images/01.jpg' },
+    { id:2,  name:'红烧排骨',   cat:'hot',  desc:'酱香浓郁，骨肉分离入口即化',               img:'images/02.jpg' },
+    { id:3,  name:'西红柿炒蛋', cat:'hot',  desc:'酸甜开胃，家常经典必备',                   img:'images/03.jpg' },
+    { id:4,  name:'麻婆豆腐',   cat:'hot',  desc:'麻辣鲜香，嫩滑豆腐入口即化',               img:'images/04.jpg' },
+    { id:5,  name:'干煸四季豆', cat:'hot',  desc:'外焦里嫩，微辣干香超下饭',                 img:'images/05.jpg' },
+    { id:6,  name:'酸辣土豆丝', cat:'hot',  desc:'脆爽酸辣，经典快炒素菜',                   img:'images/06.jpg' },
+    { id:7,  name:'宫保鸡丁',   cat:'hot',  desc:'花生脆爽，鸡肉嫩滑甜辣交织',               img:'images/07.jpg' },
+    { id:8,  name:'鱼香肉丝',   cat:'hot',  desc:'酸甜微辣，肉丝嫩滑配菜丰富',               img:'images/08.jpg' },
+    { id:9,  name:'回锅肉',     cat:'hot',  desc:'五花肉焦香，蒜苗豆豉增味',                 img:'images/09.jpg' },
+    { id:10, name:'蒜蓉西兰花', cat:'hot',  desc:'清爽脆嫩，蒜香四溢健康之选',               img:'images/10.jpg' },
+    { id:11, name:'小炒黄牛肉', cat:'hot',  desc:'嫩滑牛肉配辣椒香菜爆炒',                   img:'images/11.jpg' },
+    { id:12, name:'手撕包菜',   cat:'hot',  desc:'爽脆微辣，大火爆炒锅气十足',               img:'images/12.jpg' },
+    { id:13, name:'红烧肉',     cat:'hot',  desc:'色泽红亮，肥而不腻入口即化',               img:'images/13.jpg' },
+    { id:14, name:'凉拌黄瓜',   cat:'cold', desc:'脆嫩爽口，蒜泥香醋开胃',                   img:'images/14.jpg' },
+    { id:15, name:'凉拌木耳',   cat:'cold', desc:'脆爽酸甜，养生清道夫',                     img:'images/15.jpg' },
+    { id:16, name:'口水鸡',     cat:'cold', desc:'红油鲜香，鸡肉嫩滑麻辣过瘾',               img:'images/16.jpg' },
+    { id:17, name:'皮蛋豆腐',   cat:'cold', desc:'冰凉爽滑，皮蛋豆腐经典搭配',               img:'images/17.jpg' },
+    { id:18, name:'凉拌海带丝', cat:'cold', desc:'酸辣脆爽，低卡健康小菜',                   img:'images/18.jpg' },
+    { id:19, name:'香米饭',     cat:'staple', desc:'优质大米，粒粒分明无限续',               img:'images/19.jpg' },
+    { id:20, name:'杂粮饭',     cat:'staple', desc:'健康杂粮，营养均衡膳食纤维',             img:'images/20.jpg' },
+    { id:21, name:'紫菜蛋花汤', cat:'soup', desc:'清淡鲜美，暖胃清口',                      img:'images/21.jpg' },
+    { id:22, name:'绿豆汤',     cat:'soup', desc:'清凉解暑，夏日消暑必备',                   img:'images/22.jpg' },
+    { id:23, name:'银耳莲子羹', cat:'soup', desc:'滋补养颜，清甜顺滑',                       img:'images/23.jpg' },
+  ];
+  var PRICE = '2.98元/两';
+
+  /* ========== 2. 渲染菜品 ========== */
+  var grid = document.getElementById('dishGrid');
+  function render(cat) {
+    var list = cat === 'all' ? DISHES : DISHES.filter(function(d) { return d.cat === cat; });
+    grid.innerHTML = list.map(function(d) {
+      return '<div class="dish-card bg-white rounded-2xl overflow-hidden shadow-soft border border-gray-50 scroll-reveal">' +
+        '<div class="relative overflow-hidden aspect-square">' +
+          '<img src="' + d.img + '" alt="' + d.name + '" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML=\'<div class=\\\'flex items-center justify-center w-full h-full bg-brand-100\\\'><span class=\\\'text-4xl\\\'>🍳</span></div>\'" />' +
+          '<div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-brand-700 text-xs font-bold px-2.5 py-1 rounded-lg shadow-sm">' + PRICE + '</div>' +
+        '</div>' +
+        '<div class="p-3 lg:p-4">' +
+          '<h3 class="font-bold text-gray-900 text-sm lg:text-base truncate">' + d.name + '</h3>' +
+          '<p class="text-gray-400 text-xs mt-1 leading-relaxed" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">' + d.desc + '</p>' +
+        '</div></div>';
+    }).join('');
+    lazyLoad();
+    observeReveal();
+  }
+
+  /* ========== 3. 分类切换 ========== */
+  var tabs = document.querySelectorAll('.cat-tab');
+  tabs.forEach(function(t) {
+    t.addEventListener('click', function() {
+      tabs.forEach(function(x) { x.className = 'cat-tab px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-gray-600 shadow-sm hover:shadow-md hover:bg-brand-50 transition-all'; });
+      this.className = 'cat-tab active px-5 py-2.5 rounded-xl text-sm font-medium bg-brand-600 text-white shadow-md';
+      render(this.dataset.cat);
+    });
+  });
+  render('all');
+
+  /* ========== 4. 轮播 ========== */
+  (function() {
+    var track = document.getElementById('carouselTrack');
+    var slides = document.querySelectorAll('.carousel-slide');
+    var dots = document.getElementById('carouselDots');
+    var idx = 0, timer;
+    for (var i = 0; i < slides.length; i++) {
+      var d = document.createElement('button');
+      d.className = 'w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all';
+      d.setAttribute('aria-label', '切换到第' + (i + 1) + '张');
+      d.dataset.i = i;
+      d.addEventListener('click', function() { go(parseInt(this.dataset.i)); restart(); });
+      dots.appendChild(d);
+    }
+    function go(i) {
+      if (i < 0) i = slides.length - 1;
+      if (i >= slides.length) i = 0;
+      idx = i;
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      dots.querySelectorAll('button').forEach(function(b, j) {
+        b.className = j === idx ? 'w-3 h-3 rounded-full bg-white shadow-md transition-all' : 'w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all';
+      });
+    }
+    function restart() { clearInterval(timer); timer = setInterval(function() { go(idx + 1); }, 4000); }
+    document.getElementById('carouselPrev').addEventListener('click', function() { go(idx - 1); restart(); });
+    document.getElementById('carouselNext').addEventListener('click', function() { go(idx + 1); restart(); });
+    var sx = 0;
+    track.addEventListener('touchstart',function(e){sx=e.changedTouches[0].screenX;},{passive:true});
+    track.addEventListener('touchend',function(e){var dx=sx-e.changedTouches[0].screenX;if(Math.abs(dx)>50){go(dx>0?idx+1:idx-1);restart();}},{passive:true});
+    restart();
+  })();
+
+  /* ========== 5. 导航滚动渐变 ========== */
+  var navbar = document.getElementById('navbar');
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        navbar.classList.toggle('nav-scrolled', window.scrollY > 60);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  /* ========== 6. 移动端菜单 ========== */
+  (function() {
+    var btn = document.getElementById('menuBtn');
+    var menu = document.getElementById('mobileMenu');
+    var open = false;
+    btn.addEventListener('click', function() {
+      open = !open;
+      menu.classList.toggle('hidden', !open);
+      btn.innerHTML = open ? '<i class="fas fa-times text-xl"></i>' : '<i class="fas fa-bars text-xl"></i>';
+    });
+    document.querySelectorAll('.mobile-link').forEach(function(l) {
+      l.addEventListener('click', function() { menu.classList.add('hidden'); open = false; btn.innerHTML = '<i class="fas fa-bars text-xl"></i>'; });
+    });
+  })();
+
+  /* ========== 7. 返回顶部 ========== */
+  (function() {
+    var btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() { btn.classList.toggle('show', window.scrollY > 400); });
+    btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  })();
+
+  /* ========== 8. 图片懒加载 ========== */
+  function lazyLoad() {
+    var imgs = document.querySelectorAll('.no-such-class');
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            var img = e.target;
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+            obs.unobserve(img);
+          }
+        });
+      }, { rootMargin: '100px' });
+      imgs.forEach(function(img) { obs.observe(img); });
+    } else {
+      imgs.forEach(function(img) { img.src = img.dataset.src; img.classList.add('loaded'); });
+    }
+  }
+
+  /* ========== 9. 滚动切入动画 ========== */
+  function observeReveal() {
+    var els = document.querySelectorAll('.scroll-reveal:not(.revealed)');
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(function(el) { obs.observe(el); });
+    } else {
+      els.forEach(function(el) { el.classList.add('revealed'); });
+    }
+  }
+  lazyLoad();
+  observeReveal();
+
+  /* ========== 10. 平滑锚点滚动 ========== */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var t = document.querySelector(this.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
