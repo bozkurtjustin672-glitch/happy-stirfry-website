@@ -26,7 +26,7 @@
     .back-top-btn.show{opacity:1;transform:translateY(0);pointer-events:auto}
   </style>
 </head>
-<body class="bg-brand-50 font-sans text-gray-800 antialiased">
+<body class="bg-gradient-to-b from-green-950 via-green-900 to-green-800 font-sans text-gray-800 antialiased">
 <!-- 顶部公告栏 -->
 <div class="bg-brand-600 text-white text-center text-sm py-1.5 px-4">
   <span class="inline-block animate__animated animate__flash animate__infinite animate__slow"><i class="fas fa-fire mr-1"></i></span>
@@ -106,23 +106,45 @@
           <img src="images/banner3.jpg" onerror="this.style.display='none'" alt="快乐小炒用餐环境" class="w-full max-w-xs aspect-square object-cover rounded-3xl shadow-2xl" loading="lazy" />
         </div>
       </div>
-      <!-- 轮播项 4：品牌 LOGO / 价格 -->
+      <!-- 轮播项 4：门店 LOGO / 品牌标识 -->
       <div class="carousel-slide min-w-full flex flex-col lg:flex-row items-center px-6 lg:px-16 py-12 lg:py-20 gap-8 lg:gap-12">
-        <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
-          <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white/80 text-xs font-medium mb-4 backdrop-blur-sm"><i class="fas fa-tag text-yellow-300 mr-1"></i> 统一价格</span>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">全场统一价<br/><span class="text-brand-200 text-5xl sm:text-6xl">2.98元/两</span></h2>
-          <p class="text-white/80 text-base sm:text-lg max-w-xl mb-6 leading-relaxed">按两称重，想吃多少称多少，米饭无限续！</p>
-          <a href="#features" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 text-white border border-white/30 font-medium rounded-2xl hover:bg-white/30 transition-all"><i class="fas fa-check-circle"></i> 了解我们的优势</a>
+        <div class="flex-1 text-center lg:text-left">
+          <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-white/80 text-xs font-medium mb-4 backdrop-blur-sm"><i class="fas fa-crown text-yellow-300 mr-1"></i> 品牌 LOGO</span>
+          <div class="flex items-center justify-center lg:justify-start gap-4 mb-4">
+            <div class="w-16 h-16 bg-brand-500 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <div class="text-left">
+              <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">快乐小炒</h2>
+              <p class="text-brand-200 text-sm sm:text-base mt-1">称重快餐连锁</p>
+            </div>
+          </div>
+          <div class="mt-6 p-4 sm:p-6 bg-white/10 backdrop-blur-md rounded-3xl inline-block border border-white/20">
+            <div class="text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-white">2.98 <span class="text-brand-200 text-xl">元/两</span></div>
+              <div class="text-green-200/80 text-xs sm:text-sm mt-1">全场统一价 · 米饭无限续</div>
+            </div>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3 justify-center lg:justify-start">
+            <a href="#about" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-brand-700 font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all"><i class="fas fa-store"></i> 了解我们</a>
+            <a href="#menu" class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600/30 text-white border border-white/30 font-medium rounded-2xl hover:bg-brand-600/50 transition-all"><i class="fas fa-utensils"></i> 浏览菜单</a>
+          </div>
         </div>
-        <div class="flex-1 flex justify-center lg:justify-start order-1 lg:order-2">
+        <div class="flex-1 flex justify-center lg:justify-end">
           <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
             <div class="absolute inset-0 rounded-full bg-brand-400/20 animate-pulse"></div>
             <div class="absolute inset-4 rounded-full bg-brand-300/20 animate-pulse" style="animation-delay:0.5s"></div>
-            <div class="absolute inset-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center shadow-2xl">
-              <div class="text-center">
-                <div class="text-5xl mb-2 text-white">🥬</div>
+            <div class="absolute inset-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center shadow-2xl border-2 border-white/20">
+              <div class="text-center p-6">
+                <div class="w-20 h-20 mx-auto mb-3 bg-brand-500 rounded-2xl flex items-center justify-center text-white text-4xl shadow-xl">
+                  <i class="fas fa-utensils"></i>
+                </div>
                 <div class="text-white font-bold text-2xl tracking-wider">快乐小炒</div>
-                <div class="text-brand-200 text-sm mt-1">称重快餐 · 新鲜现炒</div>
+                <div class="text-brand-200 text-xs mt-1">称重快餐 · 新鲜现炒</div>
+                <div class="mt-3 pt-3 border-t border-white/20">
+                  <div class="text-white text-lg font-bold">总店（省妇幼店）</div>
+                  <div class="text-green-200/60 text-xs">长沙市开福区东兴园巷2号</div>
+                </div>
               </div>
             </div>
           </div>
@@ -135,7 +157,7 @@
   </div>
 </section>
 <!-- 品牌故事 -->
-<section id="about" class="py-16 lg:py-24 bg-white">
+<section id="about" class="py-16 lg:py-24">
   <div class="max-w-7xl mx-auto px-4 lg:px-6">
     <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
       <div class="scroll-reveal relative">
@@ -146,29 +168,29 @@
         <div class="absolute -top-4 -left-4 w-24 h-24 bg-warm-100 rounded-3xl -z-10"></div>
       </div>
       <div class="scroll-reveal">
-        <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">About Us</span>
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-6">关于 <span class="text-brand-600">快乐小炒</span></h2>
-        <div class="space-y-4 text-gray-600 leading-relaxed">
-          <p><strong class="text-gray-800">快乐小炒</strong> 是长沙本土成长的称重快餐连锁品牌，以"新鲜现炒、称重计费、好吃不贵"为核心理念，致力于为都市白领、社区居民提供健康便捷的日常用餐选择。</p>
-          <p>所有菜品统一价格 <strong class="text-brand-600 text-lg">2.98元/两</strong>，自助选取、按需称重，想吃多少吃多少，既避免了浪费，又让每顿饭都物超所值。</p>
+        <span class="text-brand-300 font-semibold text-sm tracking-wider uppercase">About Us</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2 mb-6">关于 <span class="text-brand-300">快乐小炒</span></h2>
+        <div class="space-y-4 text-green-100/80 leading-relaxed">
+          <p><strong class="text-white">快乐小炒</strong> 是长沙本土成长的称重快餐连锁品牌，以"新鲜现炒、称重计费、好吃不贵"为核心理念，致力于为都市白领、社区居民提供健康便捷的日常用餐选择。</p>
+          <p>所有菜品统一价格 <strong class="text-brand-300 text-lg">2.98元/两</strong>，自助选取、按需称重，想吃多少吃多少，既避免了浪费，又让每顿饭都物超所值。</p>
           <p>总店位于长沙市开福区东兴园巷2号（省妇幼旁），交通便利，环境舒适，欢迎前来品尝！</p>
         </div>
         <div class="grid grid-cols-3 gap-4 mt-8">
-          <div class="text-center p-4 bg-brand-50 rounded-2xl"><div class="text-2xl font-bold text-brand-600">20+</div><div class="text-xs text-gray-500 mt-1">现炒菜品</div></div>
-          <div class="text-center p-4 bg-brand-50 rounded-2xl"><div class="text-2xl font-bold text-brand-600">2.98</div><div class="text-xs text-gray-500 mt-1">元/两</div></div>
-          <div class="text-center p-4 bg-brand-50 rounded-2xl"><div class="text-2xl font-bold text-brand-600">0</div><div class="text-xs text-gray-500 mt-1">预制菜</div></div>
+          <div class="text-center p-4 bg-green-800/40 backdrop-blur-sm rounded-2xl border border-green-700/30"><div class="text-2xl font-bold text-brand-300">20+</div><div class="text-xs text-green-200/60 mt-1">现炒菜品</div></div>
+          <div class="text-center p-4 bg-green-800/40 backdrop-blur-sm rounded-2xl border border-green-700/30"><div class="text-2xl font-bold text-brand-300">2.98</div><div class="text-xs text-green-200/60 mt-1">元/两</div></div>
+          <div class="text-center p-4 bg-green-800/40 backdrop-blur-sm rounded-2xl border border-green-700/30"><div class="text-2xl font-bold text-brand-300">0</div><div class="text-xs text-green-200/60 mt-1">预制菜</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 <!-- 菜品展示 -->
-<section id="menu" class="py-16 lg:py-24 bg-gradient-to-b from-brand-50 to-white">
+<section id="menu" class="py-16 lg:py-24" style="background:linear-gradient(135deg, #1a3a2a 0%, #0d2818 100%)">
   <div class="max-w-7xl mx-auto px-4 lg:px-6">
     <div class="text-center mb-12 scroll-reveal">
-      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Our Menu</span>
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">菜品展示</h2>
-      <p class="text-gray-500 max-w-xl mx-auto">所有菜品统一价格 <strong class="text-brand-600">2.98元/两</strong>，自选称重，丰俭由君</p>
+      <span class="text-brand-300 font-semibold text-sm tracking-wider uppercase">Our Menu</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">菜品展示</h2>
+      <p class="text-green-200/70 max-w-xl mx-auto">所有菜品统一价格 <strong class="text-brand-600">2.98元/两</strong>，自选称重，丰俭由君</p>
     </div>
     <div class="flex flex-wrap justify-center gap-2 mb-10 scroll-reveal" id="categoryTabs">
       <button class="cat-tab active px-5 py-2.5 rounded-xl text-sm font-medium bg-brand-600 text-white shadow-md" data-cat="all">全部菜品</button>
@@ -181,12 +203,12 @@
   </div>
 </section>
 <!-- 我们的优势 -->
-<section id="features" class="py-16 lg:py-24 bg-white">
+<section id="features" class="py-16 lg:py-24">
   <div class="max-w-7xl mx-auto px-4 lg:px-6">
     <div class="text-center mb-12 scroll-reveal">
-      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Why Choose Us</span>
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">选择我们的理由</h2>
-      <p class="text-gray-500 max-w-xl mx-auto">用心做好每一餐，让快乐小炒成为您日常用餐的首选</p>
+      <span class="text-brand-300 font-semibold text-sm tracking-wider uppercase">Why Choose Us</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">选择我们的理由</h2>
+      <p class="text-green-200/70 max-w-xl mx-auto">用心做好每一餐，让快乐小炒成为您日常用餐的首选</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       <div class="scroll-reveal p-6 lg:p-8 rounded-3xl bg-brand-50 border border-brand-100 text-center group hover:bg-brand-100 transition-colors">
@@ -224,20 +246,20 @@
 </section>
 
 <!-- 员工展示 · 期待更新 -->
-<section id="team" class="py-16 lg:py-24 bg-white">
+<section id="team" class="py-16 lg:py-24">
   <div class="max-w-7xl mx-auto px-4 lg:px-6">
     <div class="text-center mb-12 scroll-reveal">
-      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Our Team</span>
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">员工风采</h2>
-      <p class="text-gray-500 max-w-xl mx-auto">快乐小炒团队，用心服务每一位顾客</p>
+      <span class="text-brand-300 font-semibold text-sm tracking-wider uppercase">Our Team</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">员工风采</h2>
+      <p class="text-green-200/70 max-w-xl mx-auto">快乐小炒团队，用心服务每一位顾客</p>
     </div>
     <div class="flex justify-center scroll-reveal">
       <div class="max-w-md w-full p-10 lg:p-14 rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100 border border-brand-200 text-center shadow-soft">
         <div class="w-20 h-20 mx-auto mb-5 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-4xl animate-pulse">
           <i class="fas fa-clock"></i>
         </div>
-        <h3 class="text-2xl font-bold text-gray-800 mb-3">员工风采展示</h3>
-        <p class="text-gray-500 mb-6 leading-relaxed">我们正在收集整理团队成员的精彩瞬间，<br/>敬请期待后续更新。</p>
+        <h3 class="text-2xl font-bold text-white mb-3">员工风采展示</h3>
+        <p class="text-green-200/70 mb-6 leading-relaxed">我们正在收集整理团队成员的精彩瞬间，<br/>敬请期待后续更新。</p>
         <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-500 text-white rounded-2xl text-sm font-medium shadow-md">
           <i class="fas fa-spinner fa-spin"></i>
           <span>期待更新</span>
@@ -265,11 +287,11 @@
   </div>
 </section>
 <!-- 门店环境 -->
-<section class="py-16 lg:py-24 bg-brand-50">
+<section class="py-16 lg:py-24" style="background:linear-gradient(135deg, #1a3a2a 0%, #0d2818 100%)">
   <div class="max-w-7xl mx-auto px-4 lg:px-6">
     <div class="text-center mb-12 scroll-reveal">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">门店环境</h2>
-      <p class="text-gray-500 max-w-xl mx-auto">温馨舒适的就餐环境，让每一餐都充满快乐</p>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">门店环境</h2>
+      <p class="text-green-200/70 max-w-xl mx-auto">温馨舒适的就餐环境，让每一餐都充满快乐</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 scroll-reveal">
       <div class="rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all"><img src="images/banner4.jpg" onerror="this.style.display='none'" alt="门店环境" class="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500" onerror="this.parentElement.innerHTML='<div class=flex items-center justify-center w-full h-full bg-brand-100><span class=text-4xl>🥗</span></div>'" /></div>
@@ -282,35 +304,35 @@
   </div>
 </section>
 <!-- 联系我们 -->
-<section id="contact" class="py-16 lg:py-24 bg-white">
+<section id="contact" class="py-16 lg:py-24">
   <div class="max-w-7xl mx-auto px-4 lg:px-6">
     <div class="text-center mb-12 scroll-reveal">
-      <span class="text-brand-600 font-semibold text-sm tracking-wider uppercase">Contact</span>
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">联系我们</h2>
-      <p class="text-gray-500 max-w-xl mx-auto">欢迎到店品尝，或通过以下方式联系我们</p>
+      <span class="text-brand-300 font-semibold text-sm tracking-wider uppercase">Contact</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">联系我们</h2>
+      <p class="text-green-200/70 max-w-xl mx-auto">欢迎到店品尝，或通过以下方式联系我们</p>
     </div>
     <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
       <div class="scroll-reveal space-y-6">
-        <div class="p-6 bg-brand-50 rounded-3xl border border-brand-100">
-          <h3 class="text-xl font-bold text-brand-700 mb-4"><i class="fas fa-store mr-2"></i>总店（省妇幼店）</h3>
+        <div class="p-6 bg-green-800/40 backdrop-blur-sm rounded-3xl border border-green-700/30">
+          <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-store mr-2"></i>总店（省妇幼店）</h3>
           <ul class="space-y-4">
             <li class="flex items-start gap-3">
               <span class="w-9 h-9 bg-brand-500 text-white rounded-xl flex items-center justify-center shrink-0 mt-0.5"><i class="fas fa-map-marker-alt"></i></span>
-              <div><div class="font-medium text-gray-800">店铺地址</div><div class="text-gray-500">长沙市开福区东兴园巷2号</div></div>
+              <div><div class="font-medium text-white">店铺地址</div><div class="text-green-200/60">长沙市开福区东兴园巷2号</div></div>
             </li>
             <li class="flex items-start gap-3">
               <span class="w-9 h-9 bg-brand-500 text-white rounded-xl flex items-center justify-center shrink-0 mt-0.5"><i class="fas fa-phone-alt"></i></span>
-              <div><div class="font-medium text-gray-800">联系电话</div><a href="tel:15273136841" class="text-brand-600 hover:text-brand-700 font-medium">152-7313-6841</a></div>
+              <div><div class="font-medium text-white">联系电话</div><a href="tel:15273136841" class="text-brand-600 hover:text-brand-700 font-medium">152-7313-6841</a></div>
             </li>
             <li class="flex items-start gap-3">
               <span class="w-9 h-9 bg-brand-500 text-white rounded-xl flex items-center justify-center shrink-0 mt-0.5"><i class="fas fa-clock"></i></span>
-              <div><div class="font-medium text-gray-800">营业时间</div><div class="text-gray-500">每天 10:00 - 21:00</div></div>
+              <div><div class="font-medium text-white">营业时间</div><div class="text-green-200/60">每天 10:00 - 21:00</div></div>
             </li>
           </ul>
         </div>
-        <div class="p-6 bg-warm-50 rounded-3xl border border-warm-200">
-          <h4 class="font-bold text-gray-800 mb-3"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i>温馨提示</h4>
-          <ul class="space-y-2 text-sm text-gray-600">
+        <div class="p-6 bg-green-800/30 backdrop-blur-sm rounded-3xl border border-green-700/20">
+          <h4 class="font-bold text-white mb-3"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i>温馨提示</h4>
+          <ul class="space-y-2 text-sm text-green-200/70">
             <li><i class="fas fa-check-circle text-brand-500 mr-2"></i>米饭无限续加，吃多少盛多少</li>
             <li><i class="fas fa-check-circle text-brand-500 mr-2"></i>统一价格 2.98元/两，称重计费透明</li>
             <li><i class="fas fa-check-circle text-brand-500 mr-2"></i>每日新鲜现炒，售完即止</li>
